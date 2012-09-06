@@ -1,4 +1,4 @@
 shellscript
 ===========
 
-shellscript
+各種シェルスクリプトを配置する
