@@ -1,5 +1,24 @@
 #!/bin/sh
 
+#ホストが存在するかどうか判定する
+checkHostname() {
+	_PING=      #pingコマンドを使い分ける
+	_HOST=${1:-`hostname`}
+	
+	case `uname -s` in
+		FreeBSD ) _PING="ping -c1 $_HOST" ;;
+		Linux ) _PING="ping -c1 $_HOST" ;;
+		* ) return 1 ;;
+	esac
+
+	if [ `$_PING 2>&1 | grep -ci "Unknown host"` -eq 0 ]
+		then
+		return 0
+		else
+		return 1
+	fi
+}
+
 #文字列が数値で構成されていれば0、数値以外が含まれていれば1を返却する
 isNumeric() {
     if [ $# -ne 1 ]; then
@@ -30,10 +49,10 @@ exists_env_var() {
     env_var=$(eval echo '$'${1})
     if [ x${env_var:-""} = x ]
     then
-	echo ${1} " : none"
+#	echo ${1} " : none"
 	return 1
     else
-	echo ${1} " : " ${env_var}
+#	echo ${1} " : " ${env_var}
 	return 0
     fi
 }

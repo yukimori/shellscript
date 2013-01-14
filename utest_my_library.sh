@@ -3,12 +3,17 @@
 #テスト対象の読み込み
 . ./my_library.sh
 
-testExist_env_var() {
-    exists_env_var "http_proxy"
-    rtrn=$?
-    #http_proxyは設定されている前提で0であるはず
-    assertEquals ${rtrn} 0
+testCheckHostname() {
+	checkHostname "gt110"
+	assertEquals $? 0
 }
+
+# testExist_env_var() {
+#     exists_env_var "http_proxy"
+#     rtrn=$?
+#     #http_proxyは設定されている前提で0であるはず
+#     assertEquals ${rtrn} 0
+# }
 
 testIsNumeric() {
     isNumeric "1234"
