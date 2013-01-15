@@ -3,6 +3,11 @@
 #テスト対象の読み込み
 . ./my_library.sh
 
+testDownShift() {
+	assertEquals `downShift AAAAA` "aaaaa"
+	assertNotEquals `downShift AAAAA` "AAAAA"
+}
+
 testCheckHostnameWithoutHostname() {
 	checkHostname
 	assertEquals $? 0
