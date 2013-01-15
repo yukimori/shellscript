@@ -4,6 +4,11 @@
 . ./my_library.sh
 
 testCheckHostnameWithoutHostname() {
+	checkHostname
+	assertEquals $? 0
+}
+
+testCheckHostnameWithErrorHostname() {
 	checkHostname "gt110s"
 	assertEquals $? 1
 }
