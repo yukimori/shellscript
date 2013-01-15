@@ -3,6 +3,11 @@
 #テスト対象の読み込み
 . ./my_library.sh
 
+testCheckHostnameWithoutHostname() {
+	checkHostname "gt110s"
+	assertEquals $? 1
+}
+
 testCheckHostname() {
 	checkHostname "gt110"
 	assertEquals $? 0
