@@ -101,6 +101,14 @@ is_defined() {
     fi
 }
 
+#環境変数が定義されているかどうかチェックし、
+#定義されていれば表示、定義されていないときはnoneを表示する
+is_envvar_defined() {
+	varname=${1}
+	info=`eval echo '$'${varname}`
+	
+}
+
 #ファイルの更新日付を調べる
 print_updatetime() {
     set -- `ls -l -d "$1"`
