@@ -1,5 +1,39 @@
 #!/bin/sh
 
+#126
+relpath2abs() {
+	#if $1 is null
+	if [ -z "$1" ]; then
+		echo "usage: relpath2abs path"
+		exit 1
+	fi
+
+	#check if $1 begins "/"
+	if [ `expr x"$1" : x'/'` -ne 0 ]; then
+		rel="$1" #$1 is abs path
+	else
+		rel="$PWD/$1" #$1 is rel path
+	fi
+	abs="/"
+	IFS='/' #単語区切りを/にする
+	for comp in $rel; do
+		case "$comp" in
+			'.'|'') # /./ // -> /
+				continue ;
+				;;
+			'..')  #.. -> remove last element
+				abs=`dirname "$abs"`
+				;;
+			*) #other
+				[ "$abs" = "/" ] && abs="/$comp" || abs="$abs/$comp"
+				;;
+		esac
+	done
+	echo "$abs"
+}
+
+#relpath2abs ..
+
 #文字列中のアルファベットを小文字に変換する
 #アルファベットでないものは何もしない
 downShift() {
@@ -106,7 +140,14 @@ is_defined() {
 is_envvar_defined() {
 	varname=${1}
 	info=`eval echo '$'${varname}`
-	
+	if [ x${info:-""} = x ]
+	then
+		echo "not defined."
+		return 1
+	else
+		echo $info
+		return 0
+	fi
 }
 
 #ファイルの更新日付を調べる

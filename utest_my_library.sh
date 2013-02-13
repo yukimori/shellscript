@@ -3,6 +3,16 @@
 #テスト対象の読み込み
 . ./my_library.sh
 
+testRelpath2abs() {
+	assertNotEquals `relpath2abs ../..` "/"
+}
+
+testIsEnvVarDefined() {
+	envvar="LANG"
+	is_envvar_defined $envvar
+	assertEquals `is_envvar_defined LANG` "ja_JP.UTF-8"
+}
+
 testDownShift() {
 	assertEquals `downShift AAAAA` "aaaaa"
 	assertNotEquals `downShift AAAAA` "AAAAA"
