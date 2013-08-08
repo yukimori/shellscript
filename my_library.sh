@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#example
+example() {
+	echo "Hello World!"
+}
+
 #126
 relpath2abs() {
 	#if $1 is null
@@ -198,6 +203,8 @@ testNormalEnd()
     #http_proxyは設定されている前提で0であるはず
     assertEquals ${rtrn} 0
 }
+
+example
 
 #execute UnitTestCase
 #. shunit2
