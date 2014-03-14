@@ -5,6 +5,17 @@ example() {
 	echo "Hello World!"
 }
 
+#http://lambdalisue.hatenablog.com/entry/2013/07/06/023040
+#起動スクリプトのパスを取得
+getPathofScript() {
+	ROOT=$(cd $(dirname $0); pwd)
+	#返り値は数値しか返却できないのでの変わりに標準出力する
+	echo "${ROOT}"
+#	ROOT2=`dirname $0`
+#	ROOT2=`cd $ROOT2;pwd`
+#	echo "ROOT2 : ${ROOT2}\n"
+}
+
 #126
 relpath2abs() {
 	#if $1 is null

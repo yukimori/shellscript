@@ -1,7 +1,16 @@
 #!/bin/sh
 
+#document for shunit2
+#https://sites.google.com/site/paclearner/shunit2-documentation
+
 #テスト対象の読み込み
 . ./my_library.sh
+
+testGetPathofScript() {
+	#関数の標準出力を取得して返り値とする
+	ROOT=`getPathofScript`
+	echo "ROOT : ${ROOT}\n"
+}
 
 testRelpath2abs() {
 	assertNotEquals `relpath2abs ../..` "/"
