@@ -4,7 +4,7 @@ dot="....."
 
 for i in `seq 5`
 do
-	printf "%s\r" $(echo ${dot:0:${i}})
+	printf "\r%s" $(echo ${dot:0:${i}})
 	sleep 1
 done
 
